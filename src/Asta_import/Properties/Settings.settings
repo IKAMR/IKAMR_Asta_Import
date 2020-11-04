@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Asta_import.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="komNavn" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="depInst" Type="System.String" Scope="User">
+      <Value Profile="(Default)">IKAM</Value>
+    </Setting>
+    <Setting Name="landKode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">NO</Value>
+    </Setting>
+    <Setting Name="fylkeNr" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1500</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

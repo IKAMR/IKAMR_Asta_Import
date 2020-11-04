@@ -1,0 +1,3 @@
+﻿Program for konvertering av IKAMR Innleveringsprotokoll til format som passer import til Asta.
+
+Laget av Tore Fadnes ved IKAMR
