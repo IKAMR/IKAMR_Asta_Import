@@ -50,6 +50,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.rdbNewSch = new System.Windows.Forms.RadioButton();
+            this.rdbOldSch = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -271,11 +273,35 @@
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
+            // rdbNewSch
+            // 
+            this.rdbNewSch.AutoSize = true;
+            this.rdbNewSch.Location = new System.Drawing.Point(16, 235);
+            this.rdbNewSch.Name = "rdbNewSch";
+            this.rdbNewSch.Size = new System.Drawing.Size(80, 17);
+            this.rdbNewSch.TabIndex = 22;
+            this.rdbNewSch.TabStop = true;
+            this.rdbNewSch.Text = "Nytt skjema";
+            this.rdbNewSch.UseVisualStyleBackColor = true;
+            // 
+            // rdbOldSch
+            // 
+            this.rdbOldSch.AutoSize = true;
+            this.rdbOldSch.Location = new System.Drawing.Point(16, 258);
+            this.rdbOldSch.Name = "rdbOldSch";
+            this.rdbOldSch.Size = new System.Drawing.Size(102, 17);
+            this.rdbOldSch.TabIndex = 23;
+            this.rdbOldSch.TabStop = true;
+            this.rdbOldSch.Text = "Gammelt skjema";
+            this.rdbOldSch.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(661, 355);
+            this.Controls.Add(this.rdbOldSch);
+            this.Controls.Add(this.rdbNewSch);
             this.Controls.Add(this.txtBxLog);
             this.Controls.Add(this.btnStartConv);
             this.Controls.Add(this.txtBxOutFile);
@@ -315,6 +341,8 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Panel panel1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.RadioButton rdbNewSch;
+        private System.Windows.Forms.RadioButton rdbOldSch;
     }
 }
 
