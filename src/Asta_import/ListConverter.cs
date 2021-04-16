@@ -34,6 +34,7 @@ namespace Asta_import
                 throw e;
             }
         }
+        // ############################################################
 
         public void ReadInList(string fileName)
         {
@@ -136,7 +137,7 @@ namespace Asta_import
                 Marshal.ReleaseComObject(xlApp);
             }
         }
-
+        // ############################################################
         public void WriteOutList(string outFileName)
         {
             Application xlApp = new Application();
@@ -228,6 +229,7 @@ namespace Asta_import
             xlApp.Quit();
             Marshal.ReleaseComObject(xlApp);
         }
+        // ############################################################
 
         private string GetValue(int row, int col, Range range)
         {
@@ -236,6 +238,7 @@ namespace Asta_import
             else
                 return "";
         }
+        // ############################################################
 
         private string GetTextValue(int row, int col, Range range)
         {
@@ -245,7 +248,7 @@ namespace Asta_import
                 return "";
         }
 
-
+        // ############################################################
         private string MakeRegPath(string AId, string S1, string S2, string S3)
         {
             string path = AId;
@@ -265,7 +268,7 @@ namespace Asta_import
             return path;
         }
     }
-
+    // #######################################################################################################
     public class Registrering
     {
         public string Path { get; set; }
