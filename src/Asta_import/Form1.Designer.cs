@@ -276,6 +276,7 @@
             // rdbNewSch
             // 
             this.rdbNewSch.AutoSize = true;
+            this.rdbNewSch.Checked = true;
             this.rdbNewSch.Location = new System.Drawing.Point(16, 235);
             this.rdbNewSch.Name = "rdbNewSch";
             this.rdbNewSch.Size = new System.Drawing.Size(80, 17);
@@ -291,7 +292,6 @@
             this.rdbOldSch.Name = "rdbOldSch";
             this.rdbOldSch.Size = new System.Drawing.Size(102, 17);
             this.rdbOldSch.TabIndex = 23;
-            this.rdbOldSch.TabStop = true;
             this.rdbOldSch.Text = "Gammelt skjema";
             this.rdbOldSch.UseVisualStyleBackColor = true;
             // 

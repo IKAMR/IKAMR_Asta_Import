@@ -20,6 +20,8 @@ namespace Asta_import
         string inFile = String.Empty;
         string outFile = String.Empty;
 
+        string schemaType = String.Empty;
+
         public string komNavn;
 
         Hashtable myHashtable;
@@ -119,6 +121,11 @@ namespace Asta_import
                 btnStartConv.Enabled = false;
                 this.AllowDrop = false;
 
+                if (rdbNewSch.Checked)
+                    schemaType = "new";
+                else
+                    schemaType = "old";
+
                 backgroundWorker1 = new BackgroundWorker();
                 backgroundWorker1.DoWork += backgroundWorker1_DoWork;
                 backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
@@ -145,7 +152,7 @@ namespace Asta_import
 
             backgroundWorker1.ReportProgress(0, "Starter konvertering av: " + inFile);
 
-            converter.ConvertList(inFile, outFile);
+            converter.ConvertList(inFile, outFile, schemaType);
 
 
         }
@@ -220,7 +227,7 @@ namespace Asta_import
     public static class Globals
     {
         public static readonly String toolName = "IKAMR Asta import";
-        public static readonly String toolVersion = "0.1";
+        public static readonly String toolVersion = "0.2";
     }
 
 

@@ -17,14 +17,21 @@ namespace Asta_import
         public List<Registrering> mappeList = new List<Registrering>();
 
 
-        public void ConvertList(string inFileName, string outFileName)
+        public void ConvertList(string inFileName, string outFileName, string schemaType)
         {
             stykkList.Clear();
             mappeList.Clear();
 
             try
             {
-                ReadInList(inFileName);
+                switch (schemaType) {
+                    case "old":
+                        ReadInList(inFileName);
+                        break;
+                    case "new":
+                        ReadNewInList(inFileName);
+                        break;
+                }
 
                 if (stykkList.Count > 0)
                     WriteOutList(outFileName);
@@ -32,6 +39,110 @@ namespace Asta_import
             {
                 OnProgressUpdate?.Invoke("ERROR: " + e.Message);
                 throw e;
+            }
+        }
+        // ############################################################
+        public void ReadNewInList(string fileName)
+        {
+            Console.WriteLine("Leser innfil: " + fileName);
+
+            Application xlApp = new Application();
+
+            Workbook inWorkBook = xlApp.Workbooks.Open(fileName);
+
+            Worksheet inSheet = inWorkBook.Sheets[1];
+
+            Range inRange = inSheet.UsedRange;
+
+            try
+            {
+
+                string arkID = GetTextValue(7, 4, inRange);
+                string ArkivNavn= GetTextValue(8, 4, inRange);
+                string SerieNavn= GetTextValue(9, 4, inRange);
+
+                int rowCount = inRange.Rows.Count;
+
+                string stykkeID = String.Empty;
+                string mappeID = String.Empty;
+
+                for (int i = 13; i <= rowCount; i++)
+                {
+                    OnProgressUpdate?.Invoke("Leser rad: " + i);
+
+                    if (inRange.Cells[i, 1].Value2 == null && inRange.Cells[i, 2].Value2 == null)
+                        continue;
+
+                    if (inRange.Cells[i, 2] != null && inRange.Cells[i, 3].Value2 == null)
+                    {
+                        //  Console.WriteLine("Row: " + i);
+
+                        stykkeID = GetTextValue(i, 2, inRange);
+                        //Console.WriteLine("Nytt stykke: " + stykkeID);
+                        Registrering stykke = new Registrering();
+                        //stykke.Path = stykkeID;
+                        //stykke.Path = arkID + '/' + serie1ID + '/' + serie2ID + '/' + serie3ID + '/';
+
+                        stykke.RegID = stykkeID;
+
+                        stykke.RegName = GetTextValue(i, 4, inRange);
+                        stykke.StartDate = GetValue(i, 5, inRange);
+                        stykke.EndDate = GetValue(i, 6, inRange);
+                        stykke.StartCode = GetTextValue(i, 7, inRange);
+                        stykke.EndCode = GetTextValue(i, 8, inRange);
+
+                        stykke.Merknad = GetTextValue(i, 9, inRange);
+
+                        stykkList.Add(stykke);
+
+                        // Console.WriteLine(stykke.RegName + " lagt til i stykkelist");
+                    }
+
+                    if (inRange.Cells[i, 2] != null && inRange.Cells[i, 3].Value2 != null)
+                    {
+                        //Console.WriteLine("Ny mappe");
+                        mappeID = GetTextValue(i, 2, inRange);
+
+                        Registrering mappe = new Registrering();
+                        mappe.Path = stykkeID + '/';
+
+
+                        mappe.RegID = mappeID;
+
+                        mappe.RegName = GetTextValue(i, 4, inRange);
+                        mappe.StartDate = GetValue(i, 5, inRange);
+                        mappe.EndDate = GetValue(i, 6, inRange);
+                        mappe.StartCode = GetTextValue(i, 7, inRange);
+                        mappe.EndCode = GetTextValue(i, 8, inRange);
+
+                        mappe.Merknad = GetTextValue(i, 9, inRange);
+
+                        mappeList.Add(mappe);
+
+                        // Console.WriteLine(mappe.RegName + " lagt til i mappelist");
+
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("UNNTAK: " + e.Message);
+                throw e;
+            }
+            finally
+            {
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+
+                Marshal.ReleaseComObject(inRange);
+                Marshal.ReleaseComObject(inSheet);
+
+                inWorkBook.Close();
+                Marshal.ReleaseComObject(inWorkBook);
+
+                xlApp.Quit();
+                Marshal.ReleaseComObject(xlApp);
             }
         }
         // ############################################################

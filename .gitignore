@@ -338,3 +338,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/doc/test_new _schema.xlsx
+/doc/test2.xlsx
+/doc/Avleveringsliste_med_koblingsprotokoll_v12.0_tfa.xlsm
